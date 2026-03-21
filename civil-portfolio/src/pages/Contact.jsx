@@ -1,12 +1,13 @@
 import { motion } from 'framer-motion';
-import { FaWhatsapp, FaEnvelope, FaMapMarkerAlt, FaPhone } from 'react-icons/fa';
+import { FaWhatsapp, FaEnvelope, FaMapMarkerAlt, FaPhone, FaLock } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const Contact = () => {
   const phoneNumber = "+919745282011"; 
   const whatsappMsg = "Hello DreamSpace, I'm interested in your engineering services.";
 
   return (
-    <section className="py-32 bg-slate-950 text-white relative overflow-hidden border-t border-white/10">
+    <section className="pt-32 pb-10 bg-slate-950 text-white relative overflow-hidden border-t border-white/10">
       
       {/* Architectural Background Grid */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none"></div>
@@ -49,7 +50,7 @@ const Contact = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="relative w-full group"
+          className="relative w-full group mb-24"
         >
           {/* Offset Wireframe Accent */}
           <div className="absolute inset-0 border border-amber-500/30 translate-x-3 translate-y-3 transition-transform duration-700 group-hover:translate-x-5 group-hover:translate-y-5 pointer-events-none z-0"></div>
@@ -111,6 +112,19 @@ const Contact = () => {
 
           </div>
         </motion.div>
+
+        {/* Subtle Admin Login Link */}
+        <div className="text-center mt-10">
+          <Link 
+            to="/admin/login" 
+            className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.3em] text-slate-700 hover:text-amber-500 transition-colors duration-300"
+            title="Admin Access"
+          >
+            <FaLock className="text-[10px]" />
+            Admin Login
+          </Link>
+        </div>
+
       </div>
     </section>
   );
