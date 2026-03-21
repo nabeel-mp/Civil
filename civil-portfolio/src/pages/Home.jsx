@@ -1,125 +1,127 @@
 import { Canvas } from '@react-three/fiber';
 import { Environment } from '@react-three/drei';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import AbstractStructure from '../components/3d/AbstractStructure';
 import bgImage from '../assets/images/construction-bg.jpg'; 
-import profileImage from '../assets/images/profile.png';  
+import profileImage from '../assets/images/rahman.png';  
 import About from './About';
 import Works from './Works';
 import Clients from './Clients';
 import Contact from './Contact';
 
 const Home = () => {
-  return (
-    // Changed to a standard wrapper so the page can actually scroll
-    <main className="w-full bg-neutral-950 font-sans">
-      
-      {/* --- HERO SECTION --- */}
-      <section className="relative h-screen w-full overflow-hidden">
-        
-        {/* Background Image with Dark Overlay */}
-        <div 
-          className="absolute inset-0 z-0 opacity-10 bg-cover bg-center"
-          style={{ backgroundImage: `url(${bgImage})` }}
-        />
-        {/* Gradient to fade seamlessly into the sections below */}
-        <div className="absolute inset-0 z-0 bg-gradient-to-b from-neutral-950/40 via-neutral-950/80 to-neutral-950" />
+  // Track scroll to slightly fade/shift the background as the user moves down
+  const { scrollYProgress } = useScroll();
+  const bgOpacity = useTransform(scrollYProgress, [0, 0.3], [0.05, 0.15]);
 
+  return (
+    <main className="w-full bg-[#F5F4F0] font-sans text-neutral-950 relative selection:bg-black selection:text-white">
+      
+      {/* --- GLOBAL 3D & IMAGE BACKGROUND --- */}
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        {/* Subtle Photographic Background */}
+        <motion.div 
+          className="absolute inset-0 bg-cover bg-center grayscale mix-blend-multiply"
+          style={{ backgroundImage: `url(${bgImage})`, opacity: bgOpacity }}
+        />
+        
         {/* 3D Canvas Layer */}
-        <div className="absolute inset-0 z-10 pointer-events-none">
-          <Canvas>
-            <ambientLight intensity={0.5} />
-            <directionalLight position={[2, 5, 2]} intensity={1} />
+        <div className="absolute inset-0 z-10 opacity-60">
+          <Canvas camera={{ position: [0, 0, 8], fov: 50 }}>
+            <ambientLight intensity={1} />
+            <directionalLight position={[2, 5, 2]} intensity={2} color="#ffffff" />
             <AbstractStructure />
             <Environment preset="city" />
           </Canvas>
         </div>
+      </div>
 
-        {/* Content Layer */}
-        <div className="relative z-20 h-full flex flex-col md:flex-row items-center justify-center max-w-7xl mx-auto px-6">
+      {/* --- SCROLLABLE CONTENT LAYER --- */}
+      <div className="relative z-20">
+        
+        {/* HERO SECTION */}
+        <section className="min-h-screen w-full flex flex-col lg:flex-row items-center justify-between max-w-[1400px] mx-auto px-6 lg:px-12 pt-32 lg:pt-0">
           
-          {/* Text Section */}
+          {/* Text Section (Left) */}
           <motion.div 
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
-            className="flex-1 relative"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }} // Custom smooth easing
+            className="flex-1 lg:pr-12 z-20"
           >
-            {/* Ambient glow behind text */}
-            <div className="absolute -inset-10 bg-neutral-800/20 blur-3xl rounded-full z-[-1]"></div>
+            <div className="flex items-center gap-4 mb-8">
+              <div className="h-[2px] w-16 bg-black"></div>
+              <span className="text-black uppercase tracking-[0.3em] text-sm font-bold">DreamSpace</span>
+            </div>
 
-            <h1 className="text-6xl md:text-8xl font-black text-white mb-6 tracking-tighter leading-[1.1]">
-              Engineering <br/> 
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-200 to-gray-600">
-                Tomorrow's
-              </span> <br/> 
-              Horizons.
+            <h1 className="text-6xl sm:text-7xl lg:text-[7.5rem] font-black text-black mb-8 tracking-tighter leading-[0.9]">
+              Build <br/> 
+              Beyond <br/> 
+              Limits.
             </h1>
-            <p className="text-gray-400 text-lg md:text-xl max-w-md mb-10 font-light border-l-2 border-gray-600 pl-4">
-              Expert civil engineering, structural design, and innovative spaces by DreamSpace.
+            
+            <p className="text-neutral-600 text-lg sm:text-xl max-w-lg mb-12 font-medium leading-relaxed">
+              Masterful civil engineering and structural design. We don't just draft blueprints; we engineer the reality of tomorrow's spaces.
             </p>
             
-            {/* Upgraded Button */}
-            <button className="group relative px-8 py-4 bg-transparent text-white font-semibold tracking-wide pointer-events-auto overflow-hidden">
-              <span className="absolute inset-0 border border-white/30 rounded-full group-hover:border-white transition-colors duration-300"></span>
-              <span className="absolute inset-0 bg-white/5 rounded-full backdrop-blur-sm group-hover:bg-white/10 transition-colors duration-300"></span>
-              <span className="relative z-10 flex items-center gap-2">
-                View Projects 
-                <span className="group-hover:translate-x-1 transition-transform duration-300">→</span>
+            {/* High-Contrast Brutalist Button */}
+            <button className="group relative px-10 py-5 bg-black text-white font-bold tracking-[0.1em] uppercase overflow-hidden pointer-events-auto">
+              <span className="absolute inset-0 w-full h-full bg-neutral-800 -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out"></span>
+              <span className="relative z-10 flex items-center gap-3">
+                Explore Projects 
+                <span className="group-hover:translate-x-2 transition-transform duration-300">→</span>
               </span>
             </button>
           </motion.div>
 
-          {/* Profile Image Section */}
+          {/* MASSIVE Profile Image Section (Right) */}
           <motion.div 
-            initial={{ opacity: 0, scale: 0.8 }}
+            initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
-            className="flex-1 flex justify-center mt-16 md:mt-0 pointer-events-auto relative"
+            transition={{ duration: 1.5, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="flex-1 flex justify-center lg:justify-end mt-16 lg:mt-0 w-full z-20 pointer-events-auto"
           >
-            {/* Ambient glow behind image */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 md:w-[450px] md:h-[450px] bg-gray-600/10 blur-[80px] rounded-full z-0"></div>
-
-            {/* Floating animation for the image container */}
-            <motion.div 
-              animate={{ y: [0, -15, 0] }}
-              transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
-              className="relative z-10 w-64 h-64 md:w-96 md:h-96 rounded-full overflow-hidden border border-white/10 shadow-[0_0_40px_rgba(0,0,0,0.8)]"
-            >
+            {/* The Monumental Arch Shape */}
+            <div className="relative w-full max-w-[450px] lg:max-w-[550px] aspect-[3/4] rounded-t-[300px] rounded-b-2xl overflow-hidden shadow-[0_30px_60px_rgba(0,0,0,0.15)] border-4 border-white">
+              
+              {/* Image with sleek grayscale-to-color interaction */}
               <img 
                 src={profileImage} 
-                alt="Civil Engineer Profile" 
-                className="w-full h-full object-cover grayscale hover:grayscale-0 hover:scale-110 transition-all duration-700 ease-out" 
+                alt="Lead Civil Engineer" 
+                className="w-full h-full object-cover grayscale hover:grayscale-0 hover:scale-105 transition-all duration-1000 ease-out" 
               />
-            </motion.div>
+              
+              {/* Overlay gradient for premium feel */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none"></div>
+            </div>
           </motion.div>
-        </div>
+        </section>
 
-        {/* Animated Scroll Indicator */}
+        {/* Animated Scroll Indicator (Dark mode version) */}
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5, duration: 1 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-20 pointer-events-none"
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-20 pointer-events-none"
         >
-          <span className="text-gray-500 text-xs tracking-[0.2em] uppercase font-semibold">Scroll</span>
-          <div className="w-[1px] h-12 bg-white/20 overflow-hidden">
+          <span className="text-black text-[10px] tracking-[0.3em] uppercase font-bold">Scroll</span>
+          <div className="w-[1px] h-16 bg-black/20 overflow-hidden">
             <motion.div 
               animate={{ y: ['-100%', '100%'] }}
               transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
-              className="w-full h-1/2 bg-white"
+              className="w-full h-1/2 bg-black"
             />
           </div>
         </motion.div>
 
-      </section>
-
-      {/* --- SUBSEQUENT SECTIONS --- */}
-      {/* These will now scroll perfectly below the hero */}
-      <About />
-      <Works />
-      <Clients />
-      <Contact />
+        {/* --- SUBSEQUENT SECTIONS --- */}
+        <div className="bg-[#F5F4F0] relative z-20">
+          <About />
+          <Works />
+          <Clients />
+          <Contact />
+        </div>
+      </div>
       
     </main>
   );
