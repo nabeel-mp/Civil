@@ -4,71 +4,77 @@ import '../styles/hero.css';
 
 const Hero = () => {
   return (
-    <section id="hero" className="hero-section">
-      {/* Background image with overlay */}
-      <div className="hero-background">
-        <img src={heroBg} alt="Construction background" className="hero-image" />
-        <div className="hero-overlay"></div>
-      </div>
+    <>
+      {/* Orange top stripe */}
+      <div className="top-stripe"></div>
 
-      {/* Content */}
-      <div className="hero-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="hero-text-wrapper">
-          {/* Accent line */}
-          <div className="accent-line"></div>
+      <section id="hero" className="hero-section">
+        {/* Background image with overlay */}
+        <div className="hero-background">
+          <img src={heroBg} alt="Construction background" className="hero-image" />
+          <div className="hero-overlay"></div>
+        </div>
 
-          {/* Eyebrow text */}
-          <p className="hero-eyebrow">Lead Civil Engineer</p>
+        {/* Content Container */}
+        <div className="hero-wrapper">
+          <div className="hero-content">
+            {/* Left Content */}
+            <div className="hero-text-section">
+              {/* Badge/Eyebrow */}
+              <div className="hero-badge">
+                <svg className="badge-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2L15.09 8.26H22L17.55 12.5L19.64 18.76L12 14.5L4.36 18.76L6.45 12.5L2 8.26H8.91L12 2Z"/>
+                </svg>
+                <span>Leading Civil Engineer</span>
+              </div>
 
-          {/* Main heading */}
-          <h1 className="hero-title">
-            Building The <span className="highlight-future">Future</span>,<br /> Today.
-          </h1>
+              {/* Main Heading */}
+              <h1 className="hero-title">
+                Building<br/>Tomorrow's<br/><span className="title-gold">Infrastructure</span>
+              </h1>
 
-          {/* Description */}
-          <p className="hero-description">
-            Specializing in sustainable infrastructure, commercial development, and structural integrity. Turning blueprints into reality with precision and excellence.
-          </p>
+              {/* Description */}
+              <p className="hero-description">
+                Delivering excellence in structural design, sustainable infrastructure projects, and comprehensive site management with precision and innovation.
+              </p>
 
-          {/* CTA Buttons */}
-          <div className="hero-buttons">
-            <a href="#works" className="btn btn-primary">
-              <span>View Projects</span>
-              <svg className="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M5 12h14M12 5l7 7-7 7"/>
-              </svg>
-            </a>
-            <a href="#contact" className="btn btn-secondary">
-              Get in Touch
-            </a>
-          </div>
-
-          {/* Stats */}
-          <div className="hero-stats">
-            <div className="stat-item">
-              <div className="stat-number">15+</div>
-              <div className="stat-label">Years Experience</div>
+              {/* Primary CTA Button */}
+              <a href="#works" className="btn-cta">
+                View Our Projects
+              </a>
             </div>
-            <div className="stat-divider"></div>
-            <div className="stat-item">
-              <div className="stat-number">50+</div>
-              <div className="stat-label">Projects Completed</div>
-            </div>
-            <div className="stat-divider"></div>
-            <div className="stat-item">
-              <div className="stat-number">100%</div>
-              <div className="stat-label">Client Satisfaction</div>
+
+            {/* Right Image Section */}
+            <div className="hero-image-section">
+              <div className="image-frame">
+                <img src={heroBg} alt="Professional Civil Engineer" className="engineer-image" />
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Scroll indicator */}
-      <div className="scroll-indicator">
-        <div className="scroll-dot"></div>
-        <p>Scroll to explore</p>
-      </div>
-    </section>
+        {/* Bottom Section - Info Cards */}
+        <div className="hero-bottom">
+          <div className="info-grid">
+            <div className="info-card">
+              <h3 className="info-card-title">Professional Solutions</h3>
+              <p className="info-card-text">Expert civil engineering solutions tailored to your project requirements.</p>
+              <a href="#works" className="info-link">Explore Projects →</a>
+            </div>
+            <div className="info-card">
+              <h3 className="info-card-title">Project Management</h3>
+              <p className="info-card-text">End-to-end project management ensuring timely delivery and quality results.</p>
+              <a href="#works" className="info-link">Learn More →</a>
+            </div>
+            <div className="info-card">
+              <h3 className="info-card-title">Quality Assurance</h3>
+              <p className="info-card-text">Rigorous quality standards and compliance checks on every project phase.</p>
+              <a href="#contact" className="info-link">Get Started →</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
   );
 };
 
