@@ -1,0 +1,273 @@
+.clients-section {
+  background: #F5F5F5;
+  padding: 100px 0;
+}
+
+.clients-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* Header */
+.clients-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 80px;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.clients-accent-line {
+  width: 40px;
+  height: 3px;
+  background: #000000;
+  margin: 0 auto 16px;
+}
+
+.clients-label {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #888888;
+  margin-bottom: 12px;
+}
+
+.clients-title {
+  font-size: 42px;
+  font-weight: 900;
+  line-height: 1.2;
+  color: #000000;
+  margin-bottom: 24px;
+  letter-spacing: -0.01em;
+}
+
+.clients-description {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #666666;
+}
+
+/* Grid */
+.clients-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-bottom: 80px;
+}
+
+.client-card {
+  background: #FFFFFF;
+  padding: 40px 24px;
+  border-radius: 12px;
+  text-align: center;
+  border: 1px solid #E5E5E5;
+  transition: all 0.3s ease-out;
+  animation: fadeInUp 0.6s ease-out backwards;
+  cursor: pointer;
+}
+
+.client-card:hover {
+  border-color: #000000;
+  transform: translateY(-8px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+}
+
+.client-logo {
+  width: 60px;
+  height: 60px;
+  background: #000000;
+  color: #FFFFFF;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: 900;
+  margin: 0 auto 16px;
+  transition: all 0.3s ease-out;
+}
+
+.client-card:hover .client-logo {
+  background: #E5E5E5;
+  color: #000000;
+  transform: scale(1.15);
+}
+
+.client-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: #000000;
+  line-height: 1.5;
+  margin: 0;
+  letter-spacing: 0.2px;
+}
+
+/* Footer */
+.clients-footer {
+  text-align: center;
+  padding: 60px;
+  background: #000000;
+  border-radius: 12px;
+  color: #FFFFFF;
+  animation: fadeInUp 0.8s ease-out 0.4s backwards;
+}
+
+.clients-footer p {
+  font-size: 18px;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.clients-cta {
+  display: inline-block;
+  padding: 12px 36px;
+  background: #FFFFFF;
+  color: #000000;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.3s ease-out;
+  text-transform: uppercase;
+}
+
+.clients-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .clients-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .clients-title {
+    font-size: 36px;
+  }
+}
+
+@media (max-width: 768px) {
+  .clients-section {
+    padding: 80px 0;
+  }
+
+  .clients-container {
+    padding: 0 24px;
+  }
+
+  .clients-header {
+    margin-bottom: 60px;
+  }
+
+  .clients-title {
+    font-size: 32px;
+  }
+
+  .clients-description {
+    font-size: 15px;
+  }
+
+  .clients-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-bottom: 60px;
+  }
+
+  .client-card {
+    padding: 32px 16px;
+  }
+
+  .client-logo {
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    margin-bottom: 12px;
+  }
+
+  .client-name {
+    font-size: 14px;
+  }
+
+  .clients-footer {
+    padding: 40px;
+  }
+
+  .clients-footer p {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .clients-section {
+    padding: 60px 0;
+  }
+
+  .clients-container {
+    padding: 0 16px;
+  }
+
+  .clients-header {
+    margin-bottom: 40px;
+  }
+
+  .clients-accent-line {
+    width: 30px;
+  }
+
+  .clients-title {
+    font-size: 26px;
+  }
+
+  .clients-description {
+    font-size: 14px;
+  }
+
+  .clients-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-bottom: 40px;
+  }
+
+  .client-card {
+    padding: 24px 16px;
+  }
+
+  .client-logo {
+    width: 45px;
+    height: 45px;
+    font-size: 20px;
+  }
+
+  .client-name {
+    font-size: 13px;
+  }
+
+  .clients-footer {
+    padding: 32px 16px;
+  }
+
+  .clients-footer p {
+    font-size: 14px;
+  }
+
+  .clients-cta {
+    padding: 10px 20px;
+    font-size: 11px;
+  }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

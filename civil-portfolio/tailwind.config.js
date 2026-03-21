@@ -7,21 +7,15 @@ export default {
   theme: {
     extend: {
       colors: {
-        'dark-bg': '#2a2a2a',
-        'dark-light': '#3a3a3a',
-        'accent-gold': '#E8981E',
-        'accent-gold-light': '#F5A623',
-        'text-light': '#e5e5e5',
-        'text-muted': '#b8b8b8',
+        'black-dark': '#000000',
+        'white-light': '#FFFFFF',
+        'gray-light': '#F5F5F5',
+        'gray-border': '#E5E5E5',
+        'text-dark': '#1a1a1a',
+        'text-muted': '#666666',
         'engineer-blue': '#1e3a8a',
         'engineer-gold': '#d97706',
       },
-      backgroundColor: {
-        'dark': '#2a2a2a',
-      },
-      textColor: {
-        'gold': '#E8981E',
-      }
     },
   },
   plugins: [],

@@ -1,0 +1,323 @@
+.about-section {
+  background: #FFFFFF;
+  padding: 100px 0;
+}
+
+.about-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 100px;
+  align-items: start;
+}
+
+/* Content Column */
+.about-content {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.about-accent-line {
+  width: 40px;
+  height: 3px;
+  background: #000000;
+  margin-bottom: 16px;
+}
+
+.about-label {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #888888;
+  margin-bottom: 12px;
+}
+
+.about-title {
+  font-size: 42px;
+  font-weight: 900;
+  line-height: 1.25;
+  color: #000000;
+  margin-bottom: 40px;
+  letter-spacing: -0.01em;
+}
+
+.about-philosophy {
+  margin-bottom: 48px;
+}
+
+.about-philosophy p {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #555555;
+  margin-bottom: 20px;
+}
+
+.about-philosophy p:last-child {
+  margin-bottom: 0;
+}
+
+.about-highlight {
+  background: #F5F5F5;
+  padding: 32px;
+  border-radius: 8px;
+  border-left: 4px solid #000000;
+}
+
+.about-highlight h4 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 16px;
+  letter-spacing: 0.3px;
+}
+
+.about-highlight ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.about-highlight li {
+  font-size: 14px;
+  color: #666666;
+  font-weight: 500;
+  padding-left: 20px;
+  position: relative;
+}
+
+.about-highlight li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: #000000;
+  font-weight: 700;
+}
+
+/* Skills Column */
+.about-skills {
+  animation: fadeInRight 0.8s ease-out;
+}
+
+.skills-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: #000000;
+  margin-bottom: 40px;
+  letter-spacing: -0.01em;
+}
+
+.skills-list {
+  margin-bottom: 60px;
+}
+
+.skill-item {
+  margin-bottom: 32px;
+}
+
+.skill-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.skill-label {
+  font-size: 15px;
+  font-weight: 600;
+  color: #000000;
+  letter-spacing: 0.2px;
+}
+
+.skill-percent {
+  font-size: 14px;
+  font-weight: 700;
+  color: #888888;
+}
+
+.skill-bar {
+  height: 4px;
+  background: #E5E5E5;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.skill-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #000000 0%, #333333 100%);
+  border-radius: 2px;
+  transition: width 0.8s ease-out;
+}
+
+/* Stats Grid */
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.stat-box {
+  padding: 24px;
+  background: #F5F5F5;
+  border-radius: 8px;
+  text-align: center;
+  transition: all 0.3s ease-out;
+  border: 1px solid #E5E5E5;
+}
+
+.stat-box:hover {
+  background: #000000;
+  color: #FFFFFF;
+  transform: translateY(-4px);
+}
+
+.stat-number {
+  font-size: 32px;
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+
+.stat-text {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .about-container {
+    gap: 60px;
+  }
+
+  .about-title {
+    font-size: 36px;
+  }
+
+  .about-stats {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-section {
+    padding: 80px 0;
+  }
+
+  .about-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 0 24px;
+  }
+
+  .about-title {
+    font-size: 32px;
+  }
+
+  .about-philosophy p {
+    font-size: 15px;
+  }
+
+  .skills-title {
+    font-size: 20px;
+  }
+
+  .skill-item {
+    margin-bottom: 24px;
+  }
+
+  .about-stats {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .stat-box {
+    padding: 16px;
+  }
+
+  .stat-number {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-section {
+    padding: 60px 0;
+  }
+
+  .about-container {
+    padding: 0 16px;
+    gap: 32px;
+  }
+
+  .about-accent-line {
+    width: 30px;
+  }
+
+  .about-title {
+    font-size: 26px;
+  }
+
+  .about-philosophy p {
+    font-size: 14px;
+  }
+
+  .about-highlight {
+    padding: 20px;
+  }
+
+  .about-highlight ul {
+    grid-template-columns: 1fr;
+  }
+
+  .skills-title {
+    font-size: 18px;
+  }
+
+  .skill-item {
+    margin-bottom: 20px;
+  }
+
+  .skill-label {
+    font-size: 14px;
+  }
+
+  .about-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-number {
+    font-size: 28px;
+  }
+}
+
+/* Animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

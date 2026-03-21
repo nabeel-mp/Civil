@@ -1,22 +1,42 @@
 import React from 'react';
+import '../styles/clients.css';
 
 const Clients = () => {
-  const clients = ['BuildCorp Inc.', 'City Planners LLC', 'Metro Developments', 'Apex Structures', 'GreenLife Builders', 'Summit Engineering'];
+  const clients = [
+    'BuildCorp Inc.',
+    'City Planners LLC',
+    'Metro Developments',
+    'Apex Structures',
+    'GreenLife Builders',
+    'Summit Engineering',
+    'Urban Solutions',
+    'Coastal Engineers',
+  ];
 
   return (
-    <section id="clients" className="py-24 bg-white border-t border-gray-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Trusted By</h2>
-          <div className="w-20 h-1 bg-engineer-gold mx-auto"></div>
-          <p className="mt-4 text-gray-600">Collaborating with industry leaders to build better communities.</p>
+    <section id="clients" className="clients-section">
+      <div className="clients-container">
+        <div className="clients-header">
+          <div className="clients-accent-line"></div>
+          <p className="clients-label">Partners</p>
+          <h2 className="clients-title">Trusted by Leading Organizations</h2>
+          <p className="clients-description">
+            We've had the privilege of collaborating with some of the industry's most respected companies to deliver exceptional infrastructure solutions.
+          </p>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 items-center">
+
+        <div className="clients-grid">
           {clients.map((client, index) => (
-            <div key={index} className="px-4 py-8 bg-gray-50 rounded-lg text-center shadow-sm border border-gray-100 hover:border-engineer-blue transition-colors duration-300">
-              <span className="font-bold text-gray-400 hover:text-engineer-blue transition-colors">{client}</span>
+            <div key={index} className="client-card" style={{ animationDelay: `${(index % 4) * 0.1}s` }}>
+              <div className="client-logo">{client.charAt(0)}</div>
+              <p className="client-name">{client}</p>
             </div>
           ))}
+        </div>
+
+        <div className="clients-footer">
+          <p>Join our network of satisfied clients</p>
+          <a href="#contact" className="clients-cta">Get in Touch</a>
         </div>
       </div>
     </section>
