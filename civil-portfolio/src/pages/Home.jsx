@@ -1,7 +1,4 @@
-import { Canvas } from '@react-three/fiber';
-import { Environment } from '@react-three/drei';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import AbstractStructure from '../components/3d/AbstractStructure';
 import bgImage from '../assets/images/construction-bg.jpg'; 
 import profileImage from '../assets/images/rahman.png';  
 import About from './About';
@@ -10,117 +7,156 @@ import Clients from './Clients';
 import Contact from './Contact';
 
 const Home = () => {
-  // Track scroll to slightly fade/shift the background as the user moves down
   const { scrollYProgress } = useScroll();
-  const bgOpacity = useTransform(scrollYProgress, [0, 0.3], [0.05, 0.15]);
+  // Slightly reduced parallax distance for smoother rendering
+  const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '15%']);
 
   return (
-    <main className="w-full bg-[#F5F4F0] font-sans text-neutral-950 relative selection:bg-black selection:text-white">
+    <main className="w-full relative selection:bg-amber-500 selection:text-white bg-slate-50">
       
-      {/* --- GLOBAL 3D & IMAGE BACKGROUND --- */}
-      <div className="fixed inset-0 z-0 pointer-events-none">
-        {/* Subtle Photographic Background */}
-        <motion.div 
-          className="absolute inset-0 bg-cover bg-center grayscale mix-blend-multiply"
-          style={{ backgroundImage: `url(${bgImage})`, opacity: bgOpacity }}
-        />
+      {/* HERO SECTION */}
+      <section className="relative min-h-screen w-full flex items-center justify-center overflow-hidden pt-20">
         
-        {/* 3D Canvas Layer */}
-        <div className="absolute inset-0 z-10 opacity-60">
-          <Canvas camera={{ position: [0, 0, 8], fov: 50 }}>
-            <ambientLight intensity={1} />
-            <directionalLight position={[2, 5, 2]} intensity={2} color="#ffffff" />
-            <AbstractStructure />
-            <Environment preset="city" />
-          </Canvas>
+        {/* OPTIMIZATION: Keep heavy blending overlays STATIC so they don't repaint on scroll */}
+        <div className="absolute inset-0 z-10 pointer-events-none">
+          {/* Deep architectural overlay */}
+          <div className="absolute inset-0 bg-slate-950/85 mix-blend-multiply"></div>
+          {/* Subtle noise/texture overlay for a premium print feel */}
+          <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
         </div>
-      </div>
 
-      {/* --- SCROLLABLE CONTENT LAYER --- */}
-      <div className="relative z-20">
-        
-        {/* HERO SECTION */}
-        <section className="min-h-screen w-full flex flex-col lg:flex-row items-center justify-between max-w-[1400px] mx-auto px-6 lg:px-12 pt-32 lg:pt-0">
+        {/* OPTIMIZATION: Only animate the raw image layer, using hardware acceleration */}
+        <motion.div 
+          className="absolute inset-0 z-0 pointer-events-none will-change-transform"
+          style={{ y: bgY }}
+        >
+          <img 
+            src={bgImage} 
+            alt="Construction Background" 
+            className="w-full h-[120%] object-cover grayscale opacity-70 -mt-[10%]" // Scale up slightly to prevent edges showing during parallax
+            loading="eager"
+          />
+        </motion.div>
+
+        {/* Hero Content */}
+        <div className="relative z-20 w-full max-w-7xl mx-auto px-6 lg:px-12 flex flex-col lg:flex-row items-center justify-between gap-16">
           
-          {/* Text Section (Left) */}
+          {/* Editorial Text Content */}
           <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }} // Custom smooth easing
-            className="flex-1 lg:pr-12 z-20"
+            initial={{ opacity: 0, x: -40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+            className="flex-1 text-left pt-12 lg:pt-0"
           >
-            <div className="flex items-center gap-4 mb-8">
-              <div className="h-[2px] w-16 bg-black"></div>
-              <span className="text-black uppercase tracking-[0.3em] text-sm font-bold">DreamSpace</span>
+            {/* Minimalist Line Label */}
+            <div className="flex items-center gap-6 mb-8">
+              <span className="w-16 h-[1px] bg-amber-500"></span>
+              <span className="text-amber-500 text-xs font-bold tracking-[0.3em] uppercase">
+                Structural Engineering
+              </span>
             </div>
-
-            <h1 className="text-6xl sm:text-7xl lg:text-[7.5rem] font-black text-black mb-8 tracking-tighter leading-[0.9]">
-              Build <br/> 
-              Beyond <br/> 
-              Limits.
+            
+            {/* Mixed Typography Heading */}
+            <h1 className="text-5xl sm:text-7xl lg:text-8xl font-black text-white mb-8 leading-[1.05] tracking-tighter">
+              Building The <br />
+              <span className="font-serif font-light italic text-amber-500 pr-4">
+                Future
+              </span> 
+              Today.
             </h1>
             
-            <p className="text-neutral-600 text-lg sm:text-xl max-w-lg mb-12 font-medium leading-relaxed">
-              Masterful civil engineering and structural design. We don't just draft blueprints; we engineer the reality of tomorrow's spaces.
+            <p className="text-gray-300 text-lg sm:text-xl max-w-lg mb-12 leading-relaxed font-light border-l border-white/20 pl-6">
+              We specialize in transforming visionary blueprints into rock-solid realities. Excellence in commercial, residential, and urban infrastructure.
             </p>
             
-            {/* High-Contrast Brutalist Button */}
-            <button className="group relative px-10 py-5 bg-black text-white font-bold tracking-[0.1em] uppercase overflow-hidden pointer-events-auto">
-              <span className="absolute inset-0 w-full h-full bg-neutral-800 -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out"></span>
-              <span className="relative z-10 flex items-center gap-3">
-                Explore Projects 
+            {/* Ghost Button with Magnetic Feel */}
+            <button className="group relative overflow-hidden border border-white/30 px-10 py-4 text-white uppercase tracking-[0.2em] text-xs font-bold transition-all hover:border-amber-500">
+              <span className="absolute inset-0 w-full h-full bg-amber-500 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)]"></span>
+              <span className="relative z-10 flex items-center gap-4 group-hover:text-slate-900 transition-colors duration-500">
+                Discover Our Work 
                 <span className="group-hover:translate-x-2 transition-transform duration-300">→</span>
               </span>
             </button>
           </motion.div>
 
-          {/* MASSIVE Profile Image Section (Right) */}
+          {/* Architectural Profile Setup */}
           <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.5, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="flex-1 flex justify-center lg:justify-end mt-16 lg:mt-0 w-full z-20 pointer-events-auto"
+            initial={{ opacity: 0, y: 60 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="flex-1 flex justify-center lg:justify-end w-full"
           >
-            {/* The Monumental Arch Shape */}
-            <div className="relative w-full max-w-[450px] lg:max-w-[550px] aspect-[3/4] rounded-t-[300px] rounded-b-2xl overflow-hidden shadow-[0_30px_60px_rgba(0,0,0,0.15)] border-4 border-white">
+            {/* Premium Layered Composition */}
+            <div className="relative w-full max-w-[400px] lg:ml-auto mt-16 lg:mt-0">
               
-              {/* Image with sleek grayscale-to-color interaction */}
-              <img 
-                src={profileImage} 
-                alt="Lead Civil Engineer" 
-                className="w-full h-full object-cover grayscale hover:grayscale-0 hover:scale-105 transition-all duration-1000 ease-out" 
-              />
-              
-              {/* Overlay gradient for premium feel */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none"></div>
+              {/* Abstract Architectural Backdrop Elements */}
+              <div className="absolute -top-6 -right-6 w-full h-full border border-amber-500/40 z-0"></div>
+              <div className="absolute top-12 -right-12 w-32 h-32 bg-amber-500 z-0 shadow-lg shadow-amber-500/20"></div>
+              <div className="absolute -bottom-6 -left-6 w-2/3 h-2/3 border border-white/20 z-0"></div>
+
+              {/* OPTIMIZATION: Added will-change-transform to infinite animations */}
+              {/* Main Image Container */}
+              <motion.div 
+                animate={{ y: [-5, 5, -5] }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                className="relative z-10 w-full aspect-[3/4] shadow-[0_20px_50px_rgba(0,0,0,0.5)] bg-slate-800 will-change-transform"
+              >
+                <img 
+                  src={profileImage} 
+                  alt="Lead Civil Engineer" 
+                  className="w-full h-full object-cover object-top" 
+                  loading="eager"
+                />
+                
+                {/* Minimalist Inner Border for a framed look */}
+                <div className="absolute inset-3 border border-white/10 pointer-events-none"></div>
+              </motion.div>
+
+              {/* Floating Glass Nameplate */}
+              <motion.div 
+                animate={{ y: [5, -5, 5] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                className="absolute -bottom-10 -left-6 md:-left-16 z-20 bg-white/10 backdrop-blur-xl border border-white/20 p-6 md:p-8 shadow-2xl will-change-transform"
+              >
+                <div className="flex items-center gap-4 mb-3">
+                  <span className="w-8 h-[2px] bg-amber-500"></span>
+                  <span className="text-amber-500 text-[10px] font-bold tracking-[0.3em] uppercase">Est. 2014</span>
+                </div>
+                <h3 className="text-3xl md:text-4xl font-serif font-light text-white mb-1">
+                  AbduRahiman<span className="text-amber-500">.</span>
+                </h3>
+                <p className="text-gray-300 text-xs font-bold tracking-[0.2em] uppercase">Chief Civil Engineer & Founder</p>
+              </motion.div>
+
             </div>
           </motion.div>
-        </section>
 
-        {/* Animated Scroll Indicator (Dark mode version) */}
+        </div>
+
+        {/* Minimal Scroll Indicator */}
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5, duration: 1 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-20 pointer-events-none"
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 z-20 pointer-events-none hidden md:flex"
         >
-          <span className="text-black text-[10px] tracking-[0.3em] uppercase font-bold">Scroll</span>
-          <div className="w-[1px] h-16 bg-black/20 overflow-hidden">
+          <span className="text-white text-[9px] tracking-[0.4em] uppercase font-bold opacity-50">Scroll</span>
+          <div className="w-[1px] h-12 bg-white/20 overflow-hidden">
             <motion.div 
               animate={{ y: ['-100%', '100%'] }}
               transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
-              className="w-full h-1/2 bg-black"
+              className="w-full h-1/2 bg-amber-500"
             />
           </div>
         </motion.div>
+      </section>
 
-        {/* --- SUBSEQUENT SECTIONS --- */}
-        <div className="bg-[#F5F4F0] relative z-20">
-          <About />
-          <Works />
-          <Clients />
-          <Contact />
-        </div>
+      {/* PAGE SECTIONS */}
+      <div className="relative z-20 bg-slate-50">
+        <About />
+        <Works />
+        <Clients />
+        <Contact />
       </div>
       
     </main>

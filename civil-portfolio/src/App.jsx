@@ -9,17 +9,16 @@ import Contact from './pages/Contact';
 
 function App() {
   return (
-    // Lenis wraps the app for premium smooth scrolling
     <ReactLenis root options={{ lerp: 0.05, smoothWheel: true }}>
       <Router>
-        <div className="bg-neutral-950 text-gray-200 min-h-screen font-sans selection:bg-gray-700">
+        <div className="bg-slate-50 min-h-screen font-sans selection:bg-amber-500 selection:text-slate-900">
           <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/works" element={<Works />} />
-            <Route path="/clients" element={<Clients />} />
-            <Route path="/contact" element={<Contact />} />
+            <Route path="/about" element={<div className="pt-20"><About /></div>} />
+            <Route path="/works" element={<div className="pt-20"><Works /></div>} />
+            <Route path="/clients" element={<div className="pt-20"><Clients /></div>} />
+            <Route path="/contact" element={<div className="pt-20"><Contact /></div>} />
           </Routes>
         </div>
       </Router>
