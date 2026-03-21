@@ -41,7 +41,7 @@ const About = () => {
             <span className="font-serif font-light italic text-amber-500 pr-2">
               Excellence
             </span>
-            Since 2014.
+            Since 2010.
           </h2>
         </div>
         

@@ -1,14 +1,15 @@
 import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
 
 const Clients = () => {
-  const clients = [
-    'BuildCorp Inc.', 
-    'City Planners LLC', 
-    'Metro Developments', 
-    'Apex Structures', 
-    'GreenLife Builders', 
-    'Summit Engineering'
-  ];
+  const [clients, setClients] = useState([]);
+
+  useEffect(() => {
+    fetch('/api/clients')
+      .then(res => res.json())
+      .then(data => setClients(data))
+      .catch(err => console.error("Error fetching clients:", err));
+  }, []);
 
   return (
     <section className="py-32 bg-white relative overflow-hidden">
@@ -35,7 +36,7 @@ const Clients = () => {
         <div className="grid grid-cols-2 md:grid-cols-3 border-t border-l border-slate-200">
           {clients.map((client, index) => (
             <motion.div 
-              key={index}
+              key={client._id || index} // FIX: Used database _id for the React key
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
@@ -50,7 +51,7 @@ const Clients = () => {
 
               {/* Client Text / Logo */}
               <span className="relative z-10 font-bold text-slate-400 group-hover:text-slate-900 uppercase tracking-[0.15em] text-xs sm:text-sm transition-colors duration-500">
-                {client}
+                {client.name} {/* FIX: Extracting the 'name' property from the database object */}
               </span>
             </motion.div>
           ))}

@@ -1,13 +1,16 @@
 import { motion } from 'framer-motion';
-
-const DUMMY_WORKS = [
-  { id: 1, title: "Skyline Tower", category: "Commercial", image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1000&auto=format&fit=crop" },
-  { id: 2, title: "Echo Bridge", category: "Infrastructure", image: "https://images.unsplash.com/photo-1545558014-8692077e9b5c?q=80&w=1000&auto=format&fit=crop" },
-  { id: 3, title: "Zenith Complex", category: "Residential", image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1000&auto=format&fit=crop" },
-  { id: 4, title: "Apex Arena", category: "Public Space", image: "https://images.unsplash.com/photo-1504307651254-35680f356f27?q=80&w=1000&auto=format&fit=crop" },
-];
+import { useState, useEffect } from 'react';
 
 const Works = () => {
+  const [works, setWorks] = useState([]);
+
+  useEffect(() => {
+    fetch('/api/works')
+      .then(res => res.json())
+      .then(data => setWorks(data))
+      .catch(err => console.error("Error fetching works:", err));
+  }, []);
+
   return (
     <section className="py-32 px-6 bg-white border-t border-gray-100 overflow-hidden">
       <div className="max-w-7xl mx-auto">
@@ -37,13 +40,14 @@ const Works = () => {
         
         {/* Staggered Architectural Grid */}
         <div className="grid md:grid-cols-2 gap-12 lg:gap-20">
-          {DUMMY_WORKS.map((work, index) => {
+          {/* FIX: Changed DUMMY_WORKS to works */}
+          {works.map((work, index) => {
             // Push every second item down to create an asymmetrical, editorial layout
             const isStaggered = index % 2 !== 0; 
 
             return (
               <motion.div 
-                key={work.id}
+                key={work._id} // FIX: Changed work.id to work._id for MongoDB
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
