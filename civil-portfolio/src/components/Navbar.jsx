@@ -11,7 +11,7 @@ const Navbar = () => {
           <svg className="logo-icon" viewBox="0 0 40 40" fill="currentColor">
             <path d="M8 20 L20 8 L32 20 M12 20 L12 28 M28 20 L28 28 M20 8 L20 20 M12 28 L28 28"/>
           </svg>
-          <span className="logo-text">STRUCTURE<span className="logo-accent">.</span></span>
+          <span className="logo-text">Dream Space<span className="logo-accent">.</span></span>
         </div>
 
         <div className={`navbar-menu ${isOpen ? 'active' : ''}`}>
