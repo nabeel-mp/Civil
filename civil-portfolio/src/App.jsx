@@ -12,6 +12,7 @@ import AdminLayout from './pages/admin/AdminLayout';
 import ManageWorks from './pages/admin/ManageWorks';
 import ManageClients from './pages/admin/ManageClients';
 import Login from './pages/admin/Login';
+import Dashboard from './pages/admin/Dashboard';
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
             {/* Admin Routes */}
             <Route path="/admin/login" element={<Login />} />
             <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<Dashboard />} />
               {/* These render inside the <Outlet /> in AdminLayout */}
               <Route path="works" element={<ManageWorks />} />
               <Route path="clients" element={<ManageClients />} />
