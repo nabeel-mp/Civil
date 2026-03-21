@@ -5,5 +5,23 @@ html {
 }
 
 body {
-  @apply bg-gray-50 text-gray-900 font-sans;
+  background: #FFFFFF;
+  color: #1a1a1a;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Smooth section transitions */
+section {
+  position: relative;
 }

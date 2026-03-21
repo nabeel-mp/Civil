@@ -1,60 +1,103 @@
 import React from 'react';
-import { Phone, Mail, MessageCircle, MapPin } from 'lucide-react';
+import '../styles/contact.css';
 
 const Contact = () => {
-  // Replace these with your actual details
   const phone = "+1234567890";
   const whatsappMsg = "Hello! I saw your portfolio and would like to discuss a project.";
   const email = "engineer@example.com";
-  
+  const location = "123 Engineering Blvd, New York, NY 10001";
+
+  const contactMethods = [
+    {
+      icon: '📧',
+      title: 'Email',
+      description: 'Send me a message',
+      link: `mailto:${email}`,
+      value: email,
+    },
+    {
+      icon: '💬',
+      title: 'WhatsApp',
+      description: 'Quick chat',
+      link: `https://wa.me/${phone.replace('+', '')}?text=${encodeURIComponent(whatsappMsg)}`,
+      value: phone,
+      external: true,
+    },
+    {
+      icon: '📞',
+      title: 'Phone',
+      description: 'Call me directly',
+      link: `tel:${phone}`,
+      value: phone,
+    },
+    {
+      icon: '📍',
+      title: 'Location',
+      description: 'Visit in person',
+      link: '#',
+      value: location,
+    },
+  ];
+
   return (
-    <section id="contact" className="py-24 bg-engineer-blue text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4">Let's Work Together</h2>
-          <div className="w-20 h-1 bg-engineer-gold mx-auto mb-6"></div>
-          <p className="text-blue-100 max-w-2xl mx-auto text-lg">
-            Ready to start your next infrastructure project? Reach out directly via the channels below.
+    <section id="contact" className="contact-section">
+      <div className="contact-container">
+        {/* Header */}
+        <div className="contact-header">
+          <div className="contact-accent-line"></div>
+          <p className="contact-label">Get In Touch</p>
+          <h2 className="contact-title">Let's Build Something Great</h2>
+          <p className="contact-description">
+            Ready to start your next project? I'd love to hear about your vision and how I can help bring it to life.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* WhatsApp Direct */}
-          <a href={`https://wa.me/${phone.replace('+', '')}?text=${encodeURIComponent(whatsappMsg)}`} target="_blank" rel="noreferrer" 
-             className="flex flex-col items-center p-8 bg-white/10 rounded-xl hover:bg-white/20 transition-all border border-white/20 group">
-            <MessageCircle className="w-12 h-12 text-green-400 mb-4 group-hover:scale-110 transition-transform" />
-            <h3 className="text-xl font-bold mb-2">WhatsApp</h3>
-            <p className="text-blue-200 text-center text-sm">Direct message me</p>
-          </a>
+        {/* Contact Methods */}
+        <div className="contact-methods">
+          {contactMethods.map((method, index) => (
+            <a
+              key={index}
+              href={method.link}
+              target={method.external ? '_blank' : '_self'}
+              rel={method.external ? 'noreferrer' : ''}
+              className="contact-card"
+              style={{ animationDelay: `${index * 0.1}s` }}
+            >
+              <div className="contact-icon">{method.icon}</div>
+              <h3 className="contact-method-title">{method.title}</h3>
+              <p className="contact-method-desc">{method.description}</p>
+              <div className="contact-value">{method.value}</div>
+              <span className="contact-arrow">→</span>
+            </a>
+          ))}
+        </div>
 
-          {/* Email Direct */}
-          <a href={`mailto:${email}`} 
-             className="flex flex-col items-center p-8 bg-white/10 rounded-xl hover:bg-white/20 transition-all border border-white/20 group">
-            <Mail className="w-12 h-12 text-engineer-gold mb-4 group-hover:scale-110 transition-transform" />
-            <h3 className="text-xl font-bold mb-2">Email</h3>
-            <p className="text-blue-200 text-center text-sm">{email}</p>
-          </a>
-
-          {/* Phone */}
-          <a href={`tel:${phone}`} 
-             className="flex flex-col items-center p-8 bg-white/10 rounded-xl hover:bg-white/20 transition-all border border-white/20 group">
-            <Phone className="w-12 h-12 text-blue-300 mb-4 group-hover:scale-110 transition-transform" />
-            <h3 className="text-xl font-bold mb-2">Call Me</h3>
-            <p className="text-blue-200 text-center text-sm">{phone}</p>
-          </a>
-
-          {/* Location */}
-          <div className="flex flex-col items-center p-8 bg-white/10 rounded-xl border border-white/20">
-            <MapPin className="w-12 h-12 text-red-400 mb-4" />
-            <h3 className="text-xl font-bold mb-2">Location</h3>
-            <p className="text-blue-200 text-center text-sm">123 Engineering Blvd,<br/>New York, NY 10001</p>
-          </div>
+        {/* Form Section */}
+        <div className="contact-form-section">
+          <h3 className="form-title">Or Fill Out This Form</h3>
+          <form className="contact-form">
+            <div className="form-group">
+              <input type="text" placeholder="Your Name" required />
+            </div>
+            <div className="form-group">
+              <input type="email" placeholder="Your Email" required />
+            </div>
+            <div className="form-group">
+              <input type="text" placeholder="Project Title" required />
+            </div>
+            <div className="form-group">
+              <textarea placeholder="Tell me about your project..." rows="5" required></textarea>
+            </div>
+            <button type="submit" className="form-submit">Send Message</button>
+          </form>
         </div>
       </div>
-      <div className="text-center mt-20 text-blue-300 text-sm">
-        &copy; {new Date().getFullYear()} Structure Engineering. All rights reserved.
+
+      {/* Footer */}
+      <div className="contact-footer">
+        <p>&copy; {new Date().getFullYear()} Dream Space. All rights reserved.</p>
       </div>
-    </section>  
+    </section>
   );
 };
 

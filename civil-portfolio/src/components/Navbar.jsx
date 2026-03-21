@@ -1,21 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
+import '../styles/navbar.css';
 
 const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <nav className="fixed w-full bg-white/90 backdrop-blur-md shadow-sm z-50 transition-all duration-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-20 items-center">
-          <div className="text-2xl font-bold text-engineer-blue tracking-tighter">
-            STRUCT<span className="text-engineer-gold">URE.</span>
-          </div>
-          <div className="hidden md:flex space-x-8">
-            <a href="#hero" className="text-gray-600 hover:text-engineer-blue font-medium transition-colors">Home</a>
-            <a href="#about" className="text-gray-600 hover:text-engineer-blue font-medium transition-colors">About</a>
-            <a href="#works" className="text-gray-600 hover:text-engineer-blue font-medium transition-colors">Works</a>
-            <a href="#clients" className="text-gray-600 hover:text-engineer-blue font-medium transition-colors">Clients</a>
-            <a href="#contact" className="px-5 py-2 bg-engineer-blue text-white rounded-md hover:bg-blue-800 transition-colors font-medium">Contact Me</a>
-          </div>
+    <nav className="navbar">
+      <div className="navbar-container">
+        <a href="#hero" className="navbar-logo">
+          <span className="logo-text">Dream Space</span>
+        </a>
+
+        <div className={`navbar-menu ${isOpen ? 'active' : ''}`}>
+          <a href="#hero" className="nav-link">Home</a>
+          <a href="#about" className="nav-link">About</a>
+          <a href="#works" className="nav-link">Work</a>
+          <a href="#clients" className="nav-link">Clients</a>
+          <a href="#contact" className="nav-cta">Contact</a>
         </div>
+
+        <button
+          className={`navbar-toggle ${isOpen ? 'active' : ''}`}
+          onClick={() => setIsOpen(!isOpen)}
+          aria-label="Toggle menu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
     </nav>
   );
