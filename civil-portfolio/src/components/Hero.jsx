@@ -1,6 +1,6 @@
 import React from 'react';
 import heroBg from '../assets/hero.png';
-import '../styles/hero.css';
+import '../styles/hero.css'; // Background image for overlay
 
 const Hero = () => {
   return (
@@ -47,7 +47,7 @@ const Hero = () => {
             {/* Right Image Section */}
             <div className="hero-image-section">
               <div className="image-frame">
-                <img src={heroBg} alt="Professional Civil Engineer" className="engineer-image" />
+                <img src="/profile-engineer.jpg" alt="Professional Civil Engineer" className="engineer-image" />
               </div>
             </div>
           </div>
