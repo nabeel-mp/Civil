@@ -120,7 +120,7 @@ const Home = () => {
               >
                 <div className="flex items-center gap-4 mb-3">
                   <span className="w-8 h-[2px] bg-amber-500"></span>
-                  <span className="text-amber-500 text-[10px] font-bold tracking-[0.3em] uppercase">Est. 2014</span>
+                  <span className="text-amber-500 text-[10px] font-bold tracking-[0.3em] uppercase">Est. 2010</span>
                 </div>
                 <h3 className="text-3xl md:text-4xl font-serif font-light text-white mb-1">
                   AbduRahiman<span className="text-amber-500">.</span>
