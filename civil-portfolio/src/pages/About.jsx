@@ -3,8 +3,8 @@ import { FaHardHat, FaBuilding, FaDraftingCompass, FaHandshake } from 'react-ico
 
 const About = () => {
   const stats = [
-    { number: "150+", label: "Projects Completed", icon: <FaBuilding /> },
-    { number: "16", label: "Years Experience", icon: <FaHardHat /> },
+    { number: "250+", label: "Projects Completed", icon: <FaBuilding /> },
+    { number: "16+", label: "Years Experience", icon: <FaHardHat /> },
     { number: "45", label: "Industry Awards", icon: <FaDraftingCompass /> },
     { number: "100%", label: "Client Satisfaction", icon: <FaHandshake /> }
   ];

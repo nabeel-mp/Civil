@@ -2,11 +2,13 @@ import { useState, useEffect } from 'react';
 import { Outlet, Link, useNavigate, useLocation } from 'react-router-dom';
 import { FaBuilding, FaUsers, FaSignOutAlt, FaChartPie, FaBars, FaTimes, FaHardHat } from 'react-icons/fa';
 import { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 const AdminLayout = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
 
   // Authentication Check
   useEffect(() => {
@@ -21,10 +23,13 @@ const AdminLayout = () => {
     setIsMobileMenuOpen(false);
   }, [location.pathname]);
 
-  const handleLogout = () => {
-    localStorage.removeItem('adminToken');
-    navigate('/admin/login');
-  };
+  const handleLogoutClick = () => setShowLogoutConfirm(true);
+  const confirmLogout = () => {
+  localStorage.removeItem('adminToken');
+  toast.success('Session Terminated');
+  navigate('/admin/login');
+};
+
 
   const navClass = (path) => {
     const isActive = location.pathname === path;
@@ -117,10 +122,10 @@ const AdminLayout = () => {
         {/* Logout Button */}
         <div className="p-6 border-t border-white/10 bg-slate-900/30">
           <button 
-            onClick={handleLogout} 
+            onClick={handleLogoutClick} 
             className="flex items-center gap-4 w-full px-4 py-3 text-[10px] uppercase tracking-[0.2em] font-bold text-slate-400 hover:text-red-400 hover:bg-red-500/10 transition-all rounded border border-transparent hover:border-red-500/30"
           >
-            <FaSignOutAlt className="text-lg" /> Terminate Session
+            <FaSignOutAlt className="text-lg" /> LogOut
           </button>
         </div>
       </aside>
@@ -138,6 +143,35 @@ const AdminLayout = () => {
         <div className="p-6 md:p-12 lg:p-16 min-h-full">
           <Outlet />
         </div>
+
+        {showLogoutConfirm && (
+  <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-slate-950/90 backdrop-blur-sm">
+    <div className="bg-slate-900 border border-amber-500/30 p-8 max-w-sm w-full shadow-2xl">
+      <div className="flex items-center gap-4 mb-6">
+        <span className="w-12 h-[1px] bg-amber-500"></span>
+        <span className="text-amber-500 text-[10px] font-bold uppercase tracking-[0.3em]">Security Protocol</span>
+      </div>
+      <h2 className="text-2xl font-serif text-white mb-2">Logged out?</h2>
+      <p className="text-slate-400 text-sm mb-8 leading-relaxed">
+        Are you sure you want to logout in the Admin Center? You will need to re-logged-in to return.
+      </p>
+      <div className="flex gap-4">
+        <button 
+          onClick={() => setShowLogoutConfirm(false)}
+          className="flex-1 px-4 py-3 text-[10px] font-bold uppercase tracking-[0.2em] text-white border border-white/20 hover:bg-white/5 transition-all"
+        >
+          Cancel
+        </button>
+        <button 
+          onClick={confirmLogout}
+          className="flex-1 px-4 py-3 text-[10px] font-bold uppercase tracking-[0.2em] bg-amber-500 text-slate-900 hover:bg-amber-400 transition-all"
+        >
+          Confirm
+        </button>
+      </div>
+    </div>
+  </div>
+)}
 
       </main>
     </div>

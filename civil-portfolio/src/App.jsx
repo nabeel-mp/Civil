@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
 import { ReactLenis } from 'lenis/react';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
@@ -18,6 +19,7 @@ function App() {
   return (
     <ReactLenis root options={{ lerp: 0.05, smoothWheel: true }}>
       <Router>
+      <Toaster position="top-right" reverseOrder={false} />
         {/* Hide default Navbar if route starts with /admin */}
         <Routes>
           <Route path="/admin/*" element={null} />

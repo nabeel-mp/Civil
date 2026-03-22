@@ -1,8 +1,10 @@
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const Works = () => {
+const Works = ({ limit }) => {
   const [works, setWorks] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch('/api/works')
@@ -10,6 +12,8 @@ const Works = () => {
       .then(data => setWorks(data))
       .catch(err => console.error("Error fetching works:", err));
   }, []);
+
+  const displayedWorks = limit ? works.slice(0, limit) : works;
 
   return (
     <section className="py-32 px-6 bg-white border-t border-gray-100 overflow-hidden">
@@ -29,24 +33,26 @@ const Works = () => {
           </div>
           
           {/* Ghost Button */}
-          <button className="group relative overflow-hidden border border-slate-900 px-8 py-4 text-slate-900 uppercase tracking-[0.2em] text-xs font-bold transition-all hover:border-amber-500">
-            <span className="absolute inset-0 w-full h-full bg-amber-500 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)]"></span>
-            <span className="relative z-10 flex items-center gap-4 group-hover:text-white transition-colors duration-500">
-              View All Projects 
-              <span className="group-hover:translate-x-2 transition-transform duration-300">→</span>
-            </span>
-          </button>
+          {limit && (
+            <button 
+              onClick={() => navigate('/works')}
+              className="group relative overflow-hidden border border-slate-900 px-8 py-4 text-slate-900 uppercase tracking-[0.2em] text-xs font-bold transition-all hover:border-amber-500"
+            >
+              <span className="absolute inset-0 w-full h-full bg-amber-500 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)]"></span>
+              <span className="relative z-10 flex items-center gap-4 group-hover:text-white transition-colors duration-500">
+                View All Projects 
+                <span className="group-hover:translate-x-2 transition-transform duration-300">→</span>
+              </span>
+            </button>
+          )}
         </div>
         
         {/* Staggered Architectural Grid */}
-        <div className="grid md:grid-cols-2 gap-12 lg:gap-20">
-          {/* FIX: Changed DUMMY_WORKS to works */}
-          {works.map((work, index) => {
-            // Push every second item down to create an asymmetrical, editorial layout
+       <div className="grid md:grid-cols-2 gap-12 lg:gap-20">
+          {displayedWorks.map((work, index) => {
             const isStaggered = index % 2 !== 0; 
-
             return (
-              <motion.div 
+              <motion.div
                 key={work._id} // FIX: Changed work.id to work._id for MongoDB
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}

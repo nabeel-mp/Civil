@@ -84,7 +84,7 @@ const Home = () => {
             initial={{ opacity: 0, y: 60 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="flex-1 flex justify-center lg:justify-end w-full"
+            className="flex-1 flex justify-center lg:justify-end w-full mb-20 lg:mb-0"
           >
             {/* Premium Layered Composition */}
             <div className="relative w-full max-w-[400px] lg:ml-auto mt-16 lg:mt-0">
@@ -116,7 +116,7 @@ const Home = () => {
               <motion.div 
                 animate={{ y: [5, -5, 5] }}
                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                className="absolute -bottom-10 -left-6 md:-left-16 z-20 bg-white/10 backdrop-blur-xl border border-white/20 p-6 md:p-8 shadow-2xl will-change-transform"
+                className="absolute -bottom-10 -left-6 md:-left-16 z-20 bg-white/10 backdrop-blur-xl border border-white/20 p-6 md:p-8 shadow-2xl will-change-transform min-w-[280px]"
               >
                 <div className="flex items-center gap-4 mb-3">
                   <span className="w-8 h-[2px] bg-amber-500"></span>
@@ -125,7 +125,7 @@ const Home = () => {
                 <h3 className="text-3xl md:text-4xl font-serif font-light text-white mb-1">
                   AbduRahiman<span className="text-amber-500">.</span>
                 </h3>
-                <p className="text-gray-300 text-xs font-bold tracking-[0.2em] uppercase">Chief Civil Engineer & Founder</p>
+                <p className="text-amber-500 text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase whitespace-nowrap">Chief Civil Engineer & Founder</p>
               </motion.div>
 
             </div>
@@ -154,7 +154,7 @@ const Home = () => {
       {/* PAGE SECTIONS */}
       <div className="relative z-20 bg-slate-50">
         <About />
-        <Works />
+        <Works limit={4} />
         <Clients />
         <Contact />
       </div>
