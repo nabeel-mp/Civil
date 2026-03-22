@@ -1,10 +1,25 @@
 import { motion } from 'framer-motion';
-import { FaWhatsapp, FaEnvelope, FaMapMarkerAlt, FaPhone, FaLock } from 'react-icons/fa';
+import { useState } from 'react';
+import { FaWhatsapp, FaEnvelope, FaMapMarkerAlt, FaPhone, FaLock, FaCopy, FaCheck } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 const Contact = () => {
-  const phoneNumber = "+919745282011"; 
+  const [copied, setCopied] = useState(false);
+  // IMPORTANT: WhatsApp requires the country code (91) but NO plus sign (+)
+  const phoneNumber = "919745282011"; 
   const whatsappMsg = "Hello DreamSpace, I'm interested in your engineering services.";
+
+  const emailAddress = "nabeelmp698@gmail.com";
+  const emailSubject = "New Project Enquiry - DreamSpace";
+  // \n creates a line break in the email!
+  const emailBody = "Hello DreamSpace Engineering Team,\n\nI am interested in discussing a potential project with you. Please let me know when you are available for a consultation.\n\nBest regards,\n[Your Name]";
+
+  const handleCopyEmail = (e) => {
+    e.preventDefault(); // Stop default navigation just in case
+    navigator.clipboard.writeText(emailAddress);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000); // Reset after 2 seconds
+  };
 
   return (
     <section className="pt-32 pb-10 bg-slate-950 text-white relative overflow-hidden border-t border-white/10">
@@ -66,7 +81,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <h4 className="text-xs font-bold text-amber-500 uppercase tracking-[0.2em] mb-2">Location</h4>
-                  <p className="font-light text-xl text-white">123 Engineering Blvd,<br/>Design District, City</p>
+                  <p className="font-light text-xl text-white">Chengara , Kavanur<br/>Malappuram, Kerala</p>
                 </div>
               </div>
               
@@ -76,6 +91,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <h4 className="text-xs font-bold text-amber-500 uppercase tracking-[0.2em] mb-2">Phone</h4>
+                  {/* You can still display the + visually, just don't use it in the link */}
                   <p className="font-light text-xl text-white">+91 97452 82011</p>
                 </div>
               </div>
@@ -97,16 +113,31 @@ const Contact = () => {
                 </span>
               </a>
 
-              {/* Email Ghost Button */}
-              <a 
-                href="mailto:contact@dreamspace.com?subject=Project Inquiry"
-                className="group/btn relative overflow-hidden border border-white px-8 py-5 text-white uppercase tracking-[0.2em] text-xs font-bold transition-all"
-              >
-                <span className="absolute inset-0 w-full h-full bg-white origin-bottom scale-y-0 group-hover/btn:scale-y-100 transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] z-0"></span>
-                <span className="relative z-10 flex items-center justify-center gap-4 group-hover/btn:text-slate-900 transition-colors duration-500">
-                  <FaEnvelope className="text-xl" /> Send an Email
-                </span>
-              </a>
+              {/* Email Container */}
+              <div className="flex flex-col gap-2">
+                {/* Primary Email Button */}
+                <a 
+                   href={`mailto:${emailAddress}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`} 
+                   className="group/btn relative overflow-hidden border border-white px-8 py-5 text-white uppercase tracking-[0.2em] text-xs font-bold transition-all"
+                >
+                  <span className="absolute inset-0 w-full h-full bg-white origin-bottom scale-y-0 group-hover/btn:scale-y-100 transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] z-0"></span>
+                  <span className="relative z-10 flex items-center justify-center gap-4 group-hover/btn:text-slate-900 transition-colors duration-500">
+                    <FaEnvelope className="text-xl" /> Send an Email
+                  </span>
+                </a>
+                
+                {/* Fallback Copy Button */}
+                <button 
+                  onClick={handleCopyEmail}
+                  className="text-[10px] text-slate-400 hover:text-amber-500 flex items-center justify-center gap-2 uppercase tracking-widest transition-colors py-2"
+                >
+                  {copied ? (
+                    <><FaCheck className="text-green-500" /> Copied to clipboard</>
+                  ) : (
+                    <><FaCopy /> or copy email address</>
+                  )}
+                </button>
+              </div>
               
             </div>
 
@@ -121,7 +152,7 @@ const Contact = () => {
             title="Admin Access"
           >
             <FaLock className="text-[10px]" />
-            Admin Login
+            
           </Link>
         </div>
 

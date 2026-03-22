@@ -14,13 +14,27 @@ export const getWorks = async (req, res) => {
 // @desc    Add a work
 // @route   POST /api/works (Protected)
 export const addWork = async (req, res) => {
-  const { title, category, image } = req.body;
   try {
-    const work = new Work({ title, category, image });
+    const { title, category } = req.body;
+    
+    // Cloudinary automatically attaches the secure image URL to req.file.path
+    const imageUrl = req.file ? req.file.path : null;
+
+    if (!imageUrl) {
+      return res.status(400).json({ message: 'Image upload failed. Please provide an image.' });
+    }
+
+    const work = new Work({ 
+      title, 
+      category, 
+      image: imageUrl // Save the Cloudinary URL to MongoDB
+    });
+    
     const createdWork = await work.save();
     res.status(201).json(createdWork);
   } catch (error) {
-    res.status(400).json({ message: 'Invalid work data' });
+    console.error("Error adding work:", error);
+    res.status(500).json({ message: 'Failed to add project', error: error.message });
   }
 };
 

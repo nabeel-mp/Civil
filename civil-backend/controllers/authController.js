@@ -11,6 +11,8 @@ export const loginAdmin = async (req, res) => {
   const { email, password } = req.body;
   const admin = await Admin.findOne({ email });
 
+  console.log("Database Admin Found:", admin);
+
   if (admin && (await admin.matchPassword(password))) {
     res.json({
       _id: admin._id,
